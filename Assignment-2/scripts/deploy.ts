@@ -1,22 +1,42 @@
-import { network } from "hardhat";
-import { parseUnits } from "viem";
+import { artifacts } from "hardhat";
+import { createWalletClient, createPublicClient, http, parseUnits } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+
+const RPC_URL = process.env.RPC_URL!;
+const CHAIN_ID = Number(process.env.CHAIN_ID!);
+const PRIVATE_KEY_RAW = (process.env.PRIVATE_KEY || "").replace(/^0x/, "");
 
 async function main() {
-  const NAME   = process.env.TOKEN_NAME   ?? "DidLabToken";
-  const SYMBOL = process.env.TOKEN_SYMBOL ?? "DLAB";
-  const SUPPLY = process.env.TOKEN_SUPPLY ?? "1000000";
+  if (!RPC_URL || !CHAIN_ID || !PRIVATE_KEY_RAW) {
+    throw new Error("Missing env RPC_URL/CHAIN_ID/PRIVATE_KEY");
+  }
 
-  const { viem } = await network.connect();
+  const { abi, bytecode } = await artifacts.readArtifact("CampusCredit");
 
-  // 18-decimals supply
-  const initial = parseUnits(SUPPLY, 18);
+  const chain = {
+    id: CHAIN_ID,
+    name: `didlab-${CHAIN_ID}`,
+    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    rpcUrls: { default: { http: [RPC_URL] } },
+  } as const;
 
-  const token = await viem.deployContract("CampusCredit", [NAME, SYMBOL, initial]);
-  console.log("CampusCredit deployed to:", token.address);
+  const account = privateKeyToAccount(`0x${PRIVATE_KEY_RAW}`);
+  const wallet = createWalletClient({ account, chain, transport: http(RPC_URL) });
+  const publicClient = createPublicClient({ chain, transport: http(RPC_URL) });
 
-  const [deployer] = await viem.getWalletClients();
-  const bal = await token.read.balanceOf([deployer.account.address]);
-  console.log("Deployer balance (wei):", bal.toString());
+  const initialSupply = parseUnits("1000000", 18);
+
+  const hash = await wallet.deployContract({ abi, bytecode, args: [initialSupply] });
+  console.log("Deploy tx:", hash);
+
+  const receipt = await publicClient.waitForTransactionReceipt({ hash });
+  const address = receipt.contractAddress!;
+
+  console.log("CampusCredit deployed at:", address);
+  console.log("Deployer:", account.address);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

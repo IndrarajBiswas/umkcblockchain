@@ -1,0 +1,8 @@
+Before | Deployer: 1000000 CAMP | Acct2: 0 CAMP
+Tx1 hash: 0x01073e1f0cdcba87085796305e4e587b580cc4f878fe25ee4bca643eb0cf01c4
+Tx1 mined in block: 2
+Tx2 hash: 0xf4c60f9572503ef31240635f716a2680659e5ca30da3145ca7447a3674ae3c4e
+Tx2 mined in block: 3
+Tx3 hash: 0xf831deb73f6869d27e811b351a3e5ad13651aaf21c61aa944a8d9d378aafb4f4
+Tx3 mined in block: 4
+After | Deployer: 999850 CAMP | Acct2: 150 CAMP

@@ -1,57 +1,75 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+# Assignment 2 – CampusCredit on DIDLab
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+This repo follows the "Assignment 2 — Analyze Transactions on DIDLab" brief. It contains:
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+- Hardhat v3 configuration with Viem and the Node.js test runner.
+- `CampusCredit` ERC‑20 contract (OpenZeppelin based).
+- TypeScript scripts for deploying, interacting (2 transfers + 1 approval with different tips), and analyzing transactions (fees + events).
+- Report + screenshot placeholders for the final submission package.
 
-## Project Overview
+## Prerequisites
 
-This example project includes:
+- Node.js 22 LTS (`node -v` → `v22.x`).
+- An assigned DIDLab RPC URL, chain ID, and faucet private key.
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+## Setup
 
-## Usage
-
-### Running Tests
-
-To run all the tests in the project, execute the following command:
-
-```shell
-npx hardhat test
+```bash
+npm install
+cp .env.example .env
+# edit .env with your team’s RPC_URL, CHAIN_ID, PRIVATE_KEY, etc.
 ```
 
-You can also selectively run the Solidity or `node:test` tests:
+## Compile
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
+```bash
+npx hardhat compile
 ```
 
-### Make a deployment to Sepolia
+## Deploy to DIDLab
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
-
-To run the deployment to a local chain:
-
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+```bash
+npx hardhat run scripts/deploy.ts --network didlab
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+Record the contract address printed by the script. You will paste it into `scripts/interact.ts` (or export `TOKEN_ADDRESS`) and the report.
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+## Generate Transactions
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```bash
+# Optionally export ACCT2 to send tokens to your teammate’s address.
+export TOKEN_ADDRESS=0xYourCampusCreditAddress
+export ACCT2=0xTeammateAddress
+npx hardhat run scripts/interact.ts --network didlab
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+This produces three hashes (two transfers + one approval) with different EIP‑1559 tips. Save them for the analyze step and the report.
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+## Analyze Fees & Logs
+
+```bash
+export TX1_HASH=0x...
+export TX2_HASH=0x...
+export TX3_HASH=0x...
+npx hardhat run scripts/analyze.ts --network didlab
 ```
+
+Copy the console output into `report.md` (Parts B–D) and take the required terminal screenshots for submission.
+
+## Optional
+
+- `screenshots/` holds the captured terminal/meta-mask/IPFS images before committing.
+- `report.md` is scaffolded with all prompts from the assignment; fill it in before pushing to GitHub.
+- To clear local artifacts: `rm -rf cache artifacts`.
+
+## Repo Checklist (per assignment)
+
+- `contracts/CampusCredit.sol`
+- `scripts/deploy.ts`
+- `scripts/interact.ts`
+- `scripts/analyze.ts`
+- `hardhat.config.ts`
+- `.gitignore`
+- `.env` (untracked), `.env.example`
+- `report.md`
+- `screenshots/`
