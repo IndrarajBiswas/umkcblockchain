@@ -58,7 +58,7 @@ Copy the console output into `report.md` (Parts B–D) and take the required ter
 
 ## Optional
 
-- `screenshots/` holds the captured terminal/meta-mask/IPFS images before committing.
+- `screenshots/npx hardhat run scripts/` contains the four terminal captures required for submission.
 - `report.md` is scaffolded with all prompts from the assignment; fill it in before pushing to GitHub.
 - To clear local artifacts: `rm -rf cache artifacts`.
 

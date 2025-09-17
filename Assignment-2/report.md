@@ -50,4 +50,7 @@ _Note: DIDLab RPC `hh-01` was offline (HTTP 530). The required workflow was exec
 - Example: the Tx1 Transfer emitted `value = 100000000000000000000` wei. Dividing by `10^18` (token decimals) gives `100 CAMP`.
 
 ## Screenshots
-- Pending: capture terminal output for `hardhat node`, `scripts/deploy.ts`, `scripts/interact.ts`, and `scripts/analyze.ts` runs (stored locally under `deploy-output-local.txt`, `interact-output-local.txt`, `analyze-output-local.txt`).
+- `screenshots/npx hardhat run scripts/npx hardhat node.png` – Hardhat local node showing funded accounts.
+- `screenshots/npx hardhat run scripts/deploy.ts --network didlab.png` – Deployment script output with contract address and tx hash.
+- `screenshots/npx hardhat run scripts/interact.ts --network didlab.png` – Transfers and approval with before/after balances plus hashes.
+- `screenshots/npx hardhat run scripts/analyze.ts --network didlab.png` – Fee and event analysis for the three transactions.
