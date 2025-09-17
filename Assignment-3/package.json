@@ -1,0 +1,31 @@
+{
+  "name": "assignment3-didlab-erc20",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Assignment 3 Hardhat v3 project for DIDLab ERC-20 deployment and operations",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.0.3",
+    "@nomicfoundation/hardhat-ignition-viem": "^3.0.3",
+    "@nomicfoundation/hardhat-keystore": "^3.0.1",
+    "@nomicfoundation/hardhat-network-helpers": "^3.0.0",
+    "@nomicfoundation/hardhat-node-test-runner": "^3.0.3",
+    "@nomicfoundation/hardhat-toolbox-viem": "^5.0.0",
+    "@nomicfoundation/hardhat-viem": "^3.0.0",
+    "@nomicfoundation/hardhat-viem-assertions": "^3.0.2",
+    "@nomicfoundation/hardhat-verify": "^3.0.2",
+    "@nomicfoundation/ignition-core": "^3.0.3",
+    "@types/node": "^22.8.5",
+    "dotenv": "^16.4.5",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.0.6",
+    "typescript": "~5.8.0",
+    "viem": "^2.37.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}
