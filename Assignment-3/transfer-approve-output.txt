@@ -1,0 +1,13 @@
+
+> assignment3-didlab-erc20@1.0.0 xfer
+> hardhat run scripts/transfer-approve.ts --network didlab
+
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+Before | Me: 999780 CAMP | You: 240 CAMP
+transfer tx: 0xd65f615858acf6099f0d89386725348f0f24645f505db2636f1369b5e246e09b block: 24 gasUsed: 36824 fee(wei): 38363155227464
+approve tx: 0x8820703a0492fdac353b04da8e48a6fb4d6183870b47e2721a551d54f9ca802e block: 25 gasUsed: 26509 fee(wei): 53987851275624
+allowance: 50 CAMP
+After | Me: 999680 CAMP | You: 340 CAMP

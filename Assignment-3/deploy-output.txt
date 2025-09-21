@@ -1,0 +1,11 @@
+> assignment3-didlab-erc20@1.0.0 deploy
+> hardhat run scripts/deploy.ts --network didlab
+
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+Deploying CampusCreditV2...
+Deploy tx: 0xf6ad8f8d20c4fee16fa460c9bdba693b7edc442ad1b45079c1d7f0368e4ed43b
+Deployed at: 0x610178dA211FEF7D417bC0e6FeD39F05609AD788
+Block: 11n

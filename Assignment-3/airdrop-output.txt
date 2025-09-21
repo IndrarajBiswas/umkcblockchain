@@ -1,0 +1,11 @@
+
+> assignment3-didlab-erc20@1.0.0 airdrop
+> hardhat run scripts/airdrop.ts --network didlab
+
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+Airdrop: 0x3d0cd2ec932a47a97c1900cbc1ed60ba907f733956f9021af1c9807c4d1e3838 block: 26 gasUsed: 58647 fee(wei): 119171912245494
+Singles total gasUsed: 102824 fee(wei): 208160495368028
+Batch saved ≈ 42.96% gas vs singles

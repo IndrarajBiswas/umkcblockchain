@@ -5,7 +5,12 @@
   "description": "Assignment 3 Hardhat v3 project for DIDLab ERC-20 deployment and operations",
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.ts --network didlab",
+    "xfer": "hardhat run scripts/transfer-approve.ts --network didlab",
+    "airdrop": "hardhat run scripts/airdrop.ts --network didlab",
+    "logs": "hardhat run scripts/logs-query.ts --network didlab"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^3.0.3",

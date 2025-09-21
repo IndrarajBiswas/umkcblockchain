@@ -68,82 +68,138 @@ Private Key: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
 WARNING: Funds sent on live network to accounts with publicly known private keys WILL BE LOST.
 
 [32meth_getTransactionCount[0m
-[32meth_getBlockByNumber[0m
-[32meth_maxPriorityFeePerGas[0m
 [32meth_estimateGas[0m
 [32meth_sendRawTransaction[0m
-  Contract deployment: CampusCredit
+  Contract deployment: <UnrecognizedContract>
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Transaction:         0x99f8d23df577b409aab169f6225c0b1f25e49724420f40a009c1b658f21e9ea5
+  Transaction:         0xebce4436cd9145c843d50b81625cb6dd245224f147a3dc9a40bc898fcaa21ff1
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            546031 of 546031
-  Block #1:            0x1c5220c4131587d9896c94655d4be26413688e69e1efa7f7e166bcfbfcbef94d
+  Gas used:            1152359 of 1152359
+  Block #1:            0x44c18e77c57166f48639deed12ee0bdffdb4f6b0f8b5b7e664a4cd39c2418546
 
 [32meth_getTransactionReceipt[0m
 [32meth_accounts[0m
 [32meth_call[0m
-  Contract call:       CampusCredit#balanceOf
+  Contract call:       <UnrecognizedContract>
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
 
 [32meth_call[0m
-  Contract call:       CampusCredit#balanceOf
+  Contract call:       <UnrecognizedContract>
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
 
 [32meth_getTransactionCount[0m
 [32meth_estimateGas[0m
 [32meth_sendRawTransaction[0m
-  Contract call:       CampusCredit#transfer
-  Transaction:         0x01073e1f0cdcba87085796305e4e587b580cc4f878fe25ee4bca643eb0cf01c4
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0xdf88b194313605159c26e48faa6ce7508b7df12d1fbc2bfd29ff3743b45d678e
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
   Value:               0 ETH
-  Gas used:            51626 of 51626
-  Block #2:            0x24d97cdee66861fb078624aed04632dc5cd0e3ec77a67190ab3cd74607bf8c16
+  Gas used:            29224 of 32193
+  Block #2:            0xbfc881818b4515943fb6b8b80555241aaf9732117b7f48c71d8d70d304696369
 
 [32meth_getTransactionReceipt[0m
 [32meth_getTransactionCount[0m
 [32meth_estimateGas[0m
 [32meth_sendRawTransaction[0m
-  Contract call:       CampusCredit#transfer
-  Transaction:         0xf4c60f9572503ef31240635f716a2680659e5ca30da3145ca7447a3674ae3c4e
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0xaac67aa7c65abcfaf2151427355a6a1f08924e6805ced025ec374e396066b522
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
   Value:               0 ETH
-  Gas used:            34526 of 34526
-  Block #3:            0x7ed6b8e5eace4dbc1eef93afc917a9cf68fa51de6bf8cdcdeb74bd9a8faee486
+  Gas used:            46409 of 46409
+  Block #3:            0xbadca951ee9809e302ae13a8aaee1e9d9ae107831ee530c55cd9683bba81c72b
+
+[32meth_getTransactionReceipt[0m
+[32meth_call[0m
+  Contract call:       <UnrecognizedContract>
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       <UnrecognizedContract>
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       <UnrecognizedContract>
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_getTransactionCount[0m
+[32meth_estimateGas[0m
+[32meth_sendRawTransaction[0m
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0xaf3ee370fea0b1fe36d9306eef428fde5ff47cb8b5cb9cc8dfb0184103b2b3b4
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            40795 of 40795
+  Block #4:            0x563996d568d2aea5027392173f1665e5d613a2f19434c9c15ec71562c7da4be6
 
 [32meth_getTransactionReceipt[0m
 [32meth_getTransactionCount[0m
 [32meth_estimateGas[0m
 [32meth_sendRawTransaction[0m
-  Contract call:       CampusCredit#approve
-  Transaction:         0xf831deb73f6869d27e811b351a3e5ad13651aaf21c61aa944a8d9d378aafb4f4
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0x2a054f6c0f5ed337aaebc2558f83b7e27314ab6332121bcb27975e306b58bb3e
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
   Value:               0 ETH
-  Gas used:            46379 of 46379
-  Block #4:            0xad5162d74c68dd4bb69658c54ecf2b352c6945da3edda76aeb88fd874660a1b5
+  Gas used:            29212 of 32179
+  Block #5:            0xc4d6c4c7bfb521dde4c7ab52afb5d81ea33b6993e967ff8f161239d20323dfbb
 
 [32meth_getTransactionReceipt[0m
-[32meth_call[0m
-  Contract call:       CampusCredit#balanceOf
+[32meth_getTransactionCount[0m
+[32meth_estimateGas[0m
+[32meth_sendRawTransaction[0m
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0xf1d26319f2ff7dba459c783d97814774bf70a35838aad735f36374b7563969da
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            92847 of 92847
+  Block #6:            0x4dcbb774d0813413290cd85d75af1990ac6002b550e70b24b094bd595bad49ce
 
-[32meth_call[0m
-  Contract call:       CampusCredit#balanceOf
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionCount[0m
+[32meth_estimateGas[0m
+[32meth_sendRawTransaction[0m
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0x149d688e20bde0216bffc4837278a4ccc0e7923192ad8132abd943650e7daff8
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            29212 of 32179
+  Block #7:            0x8e30fedbc90ec98959bdbf6a0d9713f37b6415312ff8cc536f04164d0d0697dd
 
-[32meth_getTransactionByHash[0m
 [32meth_getTransactionReceipt[0m
-[32meth_getBlockByNumber[0m
-[32meth_getTransactionByHash[0m
+[32meth_getTransactionCount[0m
+[32meth_estimateGas[0m
+[32meth_sendRawTransaction[0m
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0xdf42283f3abc469d41afafc6c160da7c0b96bfba2a4d103094a5217f0e5aa8ca
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            36812 of 36812
+  Block #8:            0x135dc92860f4249e7b029b82d9aa29049e14952e7e8a9ea3069ecd66a1329a50
+
 [32meth_getTransactionReceipt[0m
-[32meth_getBlockByNumber[0m
-[32meth_getTransactionByHash[0m
+[32meth_getTransactionCount[0m
+[32meth_estimateGas[0m
+[32meth_sendRawTransaction[0m
+  Contract call:       <UnrecognizedContract>
+  Transaction:         0x722535200f3afccdef47dad70efbb9da887c014419d71729abb40aaac3257373
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            36800 of 36800
+  Block #9:            0xf16d81275b19e04c758d75bde4fe8e42e6e3eb324a6c8223d7c9506e009e689e
+
 [32meth_getTransactionReceipt[0m
-[32meth_getBlockByNumber[0m
+[32meth_blockNumber[0m
+[32meth_getLogs[0m
