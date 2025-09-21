@@ -1,0 +1,7 @@
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+Deploy tx: 0x8874714ebb621f90ffda75b2f915de30c9e935eb7d328532588e9a732c338f17
+CampusCredit deployed at: 0x67d269191c92caf3cd7723f116c85e6e9bf55933
+Deployer: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266

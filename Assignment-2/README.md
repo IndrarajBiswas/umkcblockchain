@@ -1,24 +1,24 @@
 # Assignment 2 – CampusCredit on DIDLab
 
-This repo follows the "Assignment 2 — Analyze Transactions on DIDLab" brief. It contains:
-
-- Hardhat v3 configuration with Viem and the Node.js test runner.
-- `CampusCredit` ERC‑20 contract (OpenZeppelin based).
-- TypeScript scripts for deploying, interacting (2 transfers + 1 approval with different tips), and analyzing transactions (fees + events).
-- Report + screenshot placeholders for the final submission package.
+This assignment follows the “Analyze Transactions on DIDLab” workflow using Hardhat v3 + Viem.
+The project deploys a simple ERC‑20 (`CampusCredit`) to the Team 01 DIDLab network, executes a
+set of transfers/approvals, and analyzes the resulting on-chain fees and events.
 
 ## Prerequisites
 
-- Node.js 22 LTS (`node -v` → `v22.x`).
-- An assigned DIDLab RPC URL, chain ID, and faucet private key.
+- Node.js 22 LTS (`node -v` → `v22.x`)
+- DIDLab RPC endpoint, chain ID, and faucet private key (Team 01 → `https://hh-01.didlab.org`, `31337`)
 
 ## Setup
 
 ```bash
 npm install
 cp .env.example .env
-# edit .env with your team’s RPC_URL, CHAIN_ID, PRIVATE_KEY, etc.
+# fill in RPC_URL, CHAIN_ID, PRIVATE_KEY, ACCT2, etc.
 ```
+
+`.env.example` is pre-populated with the Team 01 defaults that were used to capture the outputs in
+this repo. Member B only needs to drop in their faucet key and reuse the recorded `TOKEN_ADDRESS`.
 
 ## Compile
 
@@ -29,47 +29,43 @@ npx hardhat compile
 ## Deploy to DIDLab
 
 ```bash
-npx hardhat run scripts/deploy.ts --network didlab
+npx hardhat run scripts/deploy.ts --network didlab | tee deploy-output.txt
 ```
 
-Record the contract address printed by the script. You will paste it into `scripts/interact.ts` (or export `TOKEN_ADDRESS`) and the report.
+The deploy script prints the transaction hash, contract address, and deployer. The current run
+(deploy hash `0x8874…8f17`) produced `TOKEN_ADDRESS=0x67D269191c92Caf3cd7723F116c85E6E9BF55933`.
+Record the address in `.env` for the interaction/analysis steps.
 
 ## Generate Transactions
 
 ```bash
-# Optionally export ACCT2 to send tokens to your teammate’s address.
-export TOKEN_ADDRESS=0xYourCampusCreditAddress
-export ACCT2=0xTeammateAddress
-npx hardhat run scripts/interact.ts --network didlab
+npx hardhat run scripts/interact.ts --network didlab | tee interact-output.txt
 ```
 
-This produces three hashes (two transfers + one approval) with different EIP‑1559 tips. Save them for the analyze step and the report.
+This script performs two transfers (100 & 50 CAMP) and one 25 CAMP approval using different
+priority fees. The output includes before/after balances for the deployer and teammate plus the
+three hashes.
 
 ## Analyze Fees & Logs
 
 ```bash
-export TX1_HASH=0x...
-export TX2_HASH=0x...
-export TX3_HASH=0x...
-npx hardhat run scripts/analyze.ts --network didlab
+export TX1_HASH=0x3510…adec
+export TX2_HASH=0xdb22…2a97
+export TX3_HASH=0x68f2…66f8
+npx hardhat run scripts/analyze.ts --network didlab | tee analyze-output.txt
 ```
 
-Copy the console output into `report.md` (Parts B–D) and take the required terminal screenshots for submission.
+The analyzer pulls block metadata, gas usage, effective fee data, and decodes the ERC‑20 events for
+all three transactions. Results are stored in `analyze-output.txt` for inclusion in the report.
 
-## Optional
-
-- `screenshots/npx hardhat run scripts/` contains the four terminal captures required for submission.
-- `report.md` is scaffolded with all prompts from the assignment; fill it in before pushing to GitHub.
-- To clear local artifacts: `rm -rf cache artifacts`.
-
-## Repo Checklist (per assignment)
+## Submission Artifacts
 
 - `contracts/CampusCredit.sol`
-- `scripts/deploy.ts`
-- `scripts/interact.ts`
-- `scripts/analyze.ts`
-- `hardhat.config.ts`
-- `.gitignore`
-- `.env` (untracked), `.env.example`
-- `report.md`
-- `screenshots/`
+- `scripts/deploy.ts`, `scripts/interact.ts`, `scripts/analyze.ts`
+- `.env.example` (documented keys), `.env` (local only)
+- `deploy-output.txt`, `interact-output.txt`, `analyze-output.txt`
+- `report.md` with live DIDLab data and screenshot references
+- `screenshots/` (terminal captures of deploy/interact/analyze)
+
+Re-run the scripts with your own DIDLab credentials to reproduce the dataset; update `.env` and
+`report.md` with the new hashes before submission.

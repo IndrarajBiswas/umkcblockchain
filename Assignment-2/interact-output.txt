@@ -1,0 +1,17 @@
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+Before | Deployer: 1000000 CAMP | Acct2: 0 CAMP
+Tx1 hash: 0x3510ce729bec7c4479eda4cfe1b3079e39df0027297b54795ed460d71394adec
+Tx1 mined in block: 31n
+Tx2 hash: 0xdb2225f0e0e9d3aedd3736b035a1cde10de98268b179d9c3d404205b621d2a97
+Tx2 mined in block: 32n
+Tx3 hash: 0x68f2fcfe83f56aeb99db53cb2aeb2072346eb06d7ff2ee1afdcb9447579866f8
+Tx3 mined in block: 33n
+After | Deployer: 999850 CAMP | Acct2: 150 CAMP
+HASHES: {
+  "tx1": "0x3510ce729bec7c4479eda4cfe1b3079e39df0027297b54795ed460d71394adec",
+  "tx2": "0xdb2225f0e0e9d3aedd3736b035a1cde10de98268b179d9c3d404205b621d2a97",
+  "tx3": "0x68f2fcfe83f56aeb99db53cb2aeb2072346eb06d7ff2ee1afdcb9447579866f8"
+}

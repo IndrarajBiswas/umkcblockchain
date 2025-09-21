@@ -1,20 +1,23 @@
 # UMKC Blockchain Assignments
 
-This repository collects all blockchain assignments for the semester. Each
-assignment lives in its own directory with code, docs, and supporting assets.
+This repository collects all blockchain coursework for the semester. Each assignment lives in its
+own directory with code, documentation, and submission artefacts.
 
-## Assignments
+## Assignment Overview
 
-- [Assignment 1 – Extend the Mini Blockchain](./Assignment-1)
-  - Proof-of-Work with difficulty ≥ 3
-  - ≥ 5 transactions per block array
-  - Chain validation / tamper detection demo
-  - Reflection on immutability and Proof-of-Work
-- [Assignment 2 – Hardhat CampusCredit ERC-20](./Assignment-2)
-  - Hardhat v3 + Viem workflow (deploy, interact, analyze)
-  - Local run documentation with inline screenshots in `report.md`
-  - Submission assets: `report.md`, terminal captures, helper scripts
-- [Assignment 3 – Placeholder](./Assignment-3)
-  - Scaffolded for the next deliverable (instructions TBD)
+- [Assignment 1 – Mini Blockchain Extension](./Assignment-1)
+  - Node.js prototype with Proof-of-Work (difficulty ≥ 3)
+  - ≥ 5 transactions per block with chain validation demo
+  - Reflection on immutability and PoW cost
+- [Assignment 2 – CampusCredit on DIDLab](./Assignment-2)
+  - Hardhat v3 + Viem workflow targeting the DIDLab Team 01 network
+  - Deploys `CampusCredit` ERC‑20, performs two transfers + one approval, and analyses fees/events
+  - Outputs: `deploy-output.txt`, `interact-output.txt`, `analyze-output.txt`, updated `report.md`
+- [Assignment 3 – CampusCreditV2 (Production-Style) on DIDLab](./Assignment-3)
+  - Hardhat v3 + Viem project with cap/pause/roles and batch airdrop support (`CampusCreditV2`)
+  - Scripts for deploy, transfer/approve, batch vs singles gas comparison, and logs query
+  - Live DIDLab data recorded in `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, and `logs-query-output.txt`
 
-Assignments will continue to land here as the semester progresses.
+Each assignment folder includes a README with step-by-step instructions, environment requirements,
+and links to the relevant artefacts. Run the workflows with your own `.env` credentials to reproduce
+the results.

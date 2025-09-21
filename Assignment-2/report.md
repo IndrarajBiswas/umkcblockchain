@@ -1,64 +1,50 @@
 # Assignment 2 — Analyze Transactions on DIDLab
 
-_Note: DIDLab RPC `hh-01` was offline (HTTP 530). The required workflow was executed end-to-end against a local Hardhat node (chainId 31337) so the steps, outputs, and analysis are documented while the instructor restores the remote endpoint._
-
-![Hardhat local node](screenshots/npx%20hardhat%20run%20scripts/npx%20hardhat%20node.png)
+_All tasks were executed on the DIDLab Team 01 network (`https://hh-01.didlab.org`, chainId `31337`). The tables below summarize the deployment, interaction hashes, and fee analysis generated from the live run._
 
 ## Part A — Deployment
-- Contract address: `0x5FbDB2315678afecb367f032d93F642f64180aa3`
+- Contract address: `0x67D269191c92Caf3cd7723F116c85E6E9BF55933`
 - Symbol / decimals: `CAMP`, 18
-- Initial supply (human / raw): `1,000,000 CAMP` / `1000000000000000000000000`
+- Initial supply (human / raw): `1,000,000 CAMP` / `1_000_000 * 10^18`
 - Compiler version: 0.8.24
-- Scripts used: `scripts/deploy.ts`
+- Deploy tx hash: `0x8874714ebb621f90ffda75b2f915de30c9e935eb7d328532588e9a732c338f17`
 
 ## Part B — Transaction Details
 
-### Tx1 (`0x01073e1f0cdcba87085796305e4e587b580cc4f878fe25ee4bca643eb0cf01c4`)
-- Status: Success
-- Block / timestamp (UTC): 2 / 2025-09-17T17:56:48Z
-- From / To: `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266` (EOA) → `0x5FbDB2315678afecb367f032d93F642f64180aa3` (CampusCredit contract)
-- Nonce: 1
+### Tx1 — Transfer 100 CAMP (`0x3510ce729bec7c4479eda4cfe1b3079e39df0027297b54795ed460d71394adec`)
+- Status: Success (block `31`, `2025-09-21T16:05:41Z`)
+- From / To: deployer (`0xf39F…2266`) → teammate (`0x7099…79C8`)
 - Gas limit / gas used: 51,626 / 51,626
-- Base fee / max fee / max priority fee: 0.769606477 gwei / 20 gwei / 1 gwei (raw: 769,606,477 / 20,000,000,000 / 1,000,000,000 wei)
-- Effective gas price / total fee: 1.769606477 gwei / 91,357,703,981,602 wei (≈ 0.000091357703981602 ETH)
-- Events (raw + human): `Transfer` value `100000000000000000000` (100 CAMP) from deployer to acct2
+- Base fee / max fee / max priority: 0.016534465 gwei / 20 gwei / 1 gwei
+- Effective gas price / total fee: 1.016534465 gwei / `52,479,608,290,090 wei`
+- Event: `Transfer` 100 CAMP to teammate
 
-![Deploy script output](screenshots/npx%20hardhat%20run%20scripts/deploy.ts%20--network%20didlab.png)
-
-### Tx2 (`0xf4c60f9572503ef31240635f716a2680659e5ca30da3145ca7447a3674ae3c4e`)
-- Status: Success
-- Block / timestamp (UTC): 3 / 2025-09-17T17:56:49Z
-- From / To: `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266` (EOA) → `0x5FbDB2315678afecb367f032d93F642f64180aa3` (CampusCredit contract)
-- Nonce: 2
+### Tx2 — Transfer 50 CAMP (`0xdb2225f0e0e9d3aedd3736b035a1cde10de98268b179d9c3d404205b621d2a97`)
+- Status: Success (block `32`, `2025-09-21T16:05:42Z`)
 - Gas limit / gas used: 34,526 / 34,526
-- Base fee / max fee / max priority fee: 0.673736765 gwei / 22 gwei / 3 gwei (raw: 673,736,765 / 22,000,000,000 / 3,000,000,000 wei)
-- Effective gas price / total fee: 3.673736765 gwei / 126,839,435,548,390 wei (≈ 0.00012683943554839 ETH)
-- Events (raw + human): `Transfer` value `50000000000000000000` (50 CAMP) from deployer to acct2
+- Base fee / max fee / max priority: 0.014474771 gwei / 22 gwei / 3 gwei
+- Effective gas price / total fee: 3.014474771 gwei / `104,077,755,943,546 wei`
+- Event: `Transfer` 50 CAMP to teammate
 
-![Interact script output](screenshots/npx%20hardhat%20run%20scripts/interact.ts%20--network%20didlab.png)
-
-### Tx3 (`0xf831deb73f6869d27e811b351a3e5ad13651aaf21c61aa944a8d9d378aafb4f4`)
-- Status: Success
-- Block / timestamp (UTC): 4 / 2025-09-17T17:56:50Z
-- From / To: `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266` (EOA) → `0x5FbDB2315678afecb367f032d93F642f64180aa3` (CampusCredit contract)
-- Nonce: 3
+### Tx3 — Approve 25 CAMP (`0x68f2fcfe83f56aeb99db53cb2aeb2072346eb06d7ff2ee1afdcb9447579866f8`)
+- Status: Success (block `33`, `2025-09-21T16:05:43Z`)
 - Gas limit / gas used: 46,379 / 46,379
-- Base fee / max fee / max priority fee: 0.589713515 gwei / 21 gwei / 2 gwei (raw: 589,713,515 / 21,000,000,000 / 2,000,000,000 wei)
-- Effective gas price / total fee: 2.589713515 gwei / 120,108,323,112,185 wei (≈ 0.000120108323112185 ETH)
-- Events (raw + human): `Approval` value `25000000000000000000` (25 CAMP) from deployer to acct2 as spender
-
-![Analyze script output](screenshots/npx%20hardhat%20run%20scripts/analyze.ts%20--network%20didlab.png)
+- Base fee / max fee / max priority: 0.01266959 gwei / 21 gwei / 2 gwei
+- Effective gas price / total fee: 2.01266959 gwei / `93,345,602,914,610 wei`
+- Event: `Approval` 25 CAMP for teammate as spender
 
 ## Part C — Fee Comparison (Tx1 vs Tx2)
-- Which landed first? Tx1 (block 2) mined before Tx2 (block 3); both confirmed sequentially because they share the same sender nonce ordering.
-- Which had higher effective gas price / priority tip? Tx2 used a 3 gwei priority tip and paid 3.673736765 gwei effective gas, higher than Tx1’s 1 gwei tip and 1.769606477 gwei effective price.
-- EIP-1559 summary: the protocol sets a base fee per block (burned) and miners receive the priority fee (“tip”). Senders cap what they pay with `maxFeePerGas`. The actual price is `min(maxFeePerGas, baseFee + maxPriorityFeePerGas)`, so increasing the tip raises the priority portion while still respecting the base-fee requirement.
+- Ordering: Tx1 confirmed in block 31, Tx2 in block 32 (nonce ordering preserved).
+- Effective price: Tx2 paid ~3.01 gwei vs Tx1’s ~1.02 gwei because of the higher priority fee (3 gwei vs 1 gwei), demonstrating EIP‑1559’s tip mechanism.
+- EIP‑1559 summary: the base fee is burned each block, while the priority fee is paid to the validator. The effective price is `min(maxFeePerGas, baseFee + maxPriorityFeePerGas)`, so increasing the max priority fee awards faster inclusion at the cost of a higher effective price.
 
 ## Part D — Decimals & Conversion
-- Example: the Tx1 Transfer emitted `value = 100000000000000000000` wei. Dividing by `10^18` (token decimals) gives `100 CAMP`.
+- Example: Tx1 emitted `100000000000000000000` as the transfer value. Converting by `10^18` (token decimals) → `100 CAMP`.
 
-## Screenshots
-- `screenshots/npx hardhat run scripts/npx hardhat node.png` – Hardhat local node showing funded accounts.
-- `screenshots/npx hardhat run scripts/deploy.ts --network didlab.png` – Deployment script output with contract address and tx hash.
-- `screenshots/npx hardhat run scripts/interact.ts --network didlab.png` – Transfers and approval with before/after balances plus hashes.
-- `screenshots/npx hardhat run scripts/analyze.ts --network didlab.png` – Fee and event analysis for the three transactions.
+## Evidence & Outputs
+- `deploy-output.txt` — deployment hash/address excerpt
+- `interact-output.txt` — before/after balances and transaction hashes
+- `analyze-output.txt` — block/gas/fee breakdown for all three hashes
+- Screenshots in `screenshots/` capture the deploy, interact, and analyze terminal sessions.
+
+_Re-run the scripts with your `.env` values to regenerate the dataset; update `report.md` with the new hashes before submission._

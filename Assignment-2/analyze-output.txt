@@ -1,0 +1,64 @@
+Compiling your Solidity contracts...
+
+Nothing to compile
+
+
+=== 0x3510ce729bec7c4479eda4cfe1b3079e39df0027297b54795ed460d71394adec ===
+Status: Success
+Block: 31n
+Timestamp (UTC): 2025-09-21T16:05:41.000Z
+From: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+To: 0x67d269191c92caf3cd7723f116c85e6e9bf55933
+Nonce: 30
+Gas limit: 51626n
+Gas used: 51626n
+Base fee per gas: 16534465n
+Max fee per gas: 20000000000n
+Max priority fee per gas: 1000000000n
+Effective gas price: 1016534465n
+Total fee (wei): 52479608290090n
+Event: Transfer {
+  from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+  value: 100000000000000000000n
+}
+
+=== 0xdb2225f0e0e9d3aedd3736b035a1cde10de98268b179d9c3d404205b621d2a97 ===
+Status: Success
+Block: 32n
+Timestamp (UTC): 2025-09-21T16:05:42.000Z
+From: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+To: 0x67d269191c92caf3cd7723f116c85e6e9bf55933
+Nonce: 31
+Gas limit: 34526n
+Gas used: 34526n
+Base fee per gas: 14474771n
+Max fee per gas: 22000000000n
+Max priority fee per gas: 3000000000n
+Effective gas price: 3014474771n
+Total fee (wei): 104077755943546n
+Event: Transfer {
+  from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  to: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+  value: 50000000000000000000n
+}
+
+=== 0x68f2fcfe83f56aeb99db53cb2aeb2072346eb06d7ff2ee1afdcb9447579866f8 ===
+Status: Success
+Block: 33n
+Timestamp (UTC): 2025-09-21T16:05:43.000Z
+From: 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+To: 0x67d269191c92caf3cd7723f116c85e6e9bf55933
+Nonce: 32
+Gas limit: 46379n
+Gas used: 46379n
+Base fee per gas: 12669590n
+Max fee per gas: 21000000000n
+Max priority fee per gas: 2000000000n
+Effective gas price: 2012669590n
+Total fee (wei): 93345602914610n
+Event: Approval {
+  owner: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266',
+  spender: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8',
+  value: 25000000000000000000n
+}
