@@ -1,45 +1,104 @@
 # Assignment 3 — Build, Deploy & Operate a Production-Style ERC-20 on DIDLab
 
-_All data below was collected on the live DIDLab Team 01 network (RPC `https://hh-01.didlab.org`, chainId `31337`). `CampusCreditV2` implements cap enforcement, pausing, role gates, and a batch airdrop._
+_All activities were completed on the live DIDLab Team 01 network (`https://hh-01.didlab.org`, chain ID `31337`). The `CampusCreditV2` token extends OpenZeppelin’s ERC‑20 with a hard supply cap, pausing, granular roles, and a batch airdrop designed for gas efficiency._
 
-## Part A — Deployment
-- Contract address: `0x610178dA211FEF7D417bC0e6FeD39F05609AD788`
-- Deploy tx hash: `0xf6ad8f8d20c4fee16fa460c9bdba693b7edc442ad1b45079c1d7f0368e4ed43b`
-- Block number: `11`
-- Token parameters: name `DidLabToken`, symbol `DLAB`, decimals `18`, cap `2,000,000 CAMP`
-- Initial mint: `1,000,000 CAMP` to deployer `0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266`
-- Roles granted at deploy: `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE`, `PAUSER_ROLE`
-- Gas policy: `maxPriorityFeePerGas` 2 gwei, `maxFeePerGas` 20 gwei (EIP-1559)
+---
 
-## Part B — Transfer & Approve (`npm run xfer`)
-- Transfer `0xd65f615858acf6099f0d89386725348f0f24645f505db2636f1369b5e246e09b`
-  - Block `24`, gas used `36,824`, fee `38,363,155,227,464 wei`
-  - Action: 100 CAMP from deployer → teammate `0x70997970C51812dc3A010C7d01b50e0d17dc79C8`
-- Approve `0x8820703a0492fdac353b04da8e48a6fb4d6183870b47e2721a551d54f9ca802e`
-  - Block `25`, gas used `26,509`, fee `53,987,851,275,624 wei`
-  - Action: approve teammate for 50 CAMP allowance
-- Balances before: deployer `999,780 CAMP`, teammate `240 CAMP`
-- Balances after: deployer `999,680 CAMP`, teammate `340 CAMP`
-- Allowance after script: `50 CAMP`
+## 1. Deployment Summary
 
-## Part C — Batch Airdrop vs Singles (`npm run airdrop`)
+| Item | Value |
+| --- | --- |
+| Contract | `CampusCreditV2` |
+| Address | `0x610178dA211FEF7D417bC0e6FeD39F05609AD788` |
+| Deploy Tx | `0xf6ad8f8d20c4fee16fa460c9bdba693b7edc442ad1b45079c1d7f0368e4ed43b` (block `11`) |
+| Token Parameters | Name `DidLabToken`, Symbol `DLAB`, Decimals `18`, Cap `2,000,000 DLAB` |
+| Initial Distribution | `1,000,000 DLAB` minted to deployer `0xf39F…2266` |
+| Roles Assigned | `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE`, `PAUSER_ROLE` → deployer |
+| Gas Policy | `maxPriorityFeePerGas` 2 gwei, `maxFeePerGas` 20 gwei |
+
+![Hardhat deploy output](screenshots/cli-deploy.png)
+
+---
+
+## 2. Operational Scripts & Results
+
+### 2.1 Transfer & Approve (`npm run xfer`)
+
+| Field | Transfer | Approve |
+| --- | --- | --- |
+| Tx Hash | `0xd65f615858acf6099f0d89386725348f0f24645f505db2636f1369b5e246e09b` | `0x8820703a0492fdac353b04da8e48a6fb4d6183870b47e2721a551d54f9ca802e` |
+| Block / Timestamp | `24` / `2025-09-21T16:06:01Z` | `25` / `2025-09-21T16:06:02Z` |
+| Gas Used | `36,824` | `26,509` |
+| Total Fee | `38,363,155,227,464 wei` | `53,987,851,275,624 wei` |
+| Action | 100 DLAB → teammate `0x7099…79C8` | Approve 50 DLAB for teammate |
+
+Balances: Deployer `999,780 → 999,680 DLAB`, teammate `240 → 340 DLAB`. Allowance set to `50 DLAB`.
+
+![Transfer & approve script output](screenshots/cli-transfer-approve.png)
+
+### 2.2 Batch Airdrop vs N Singles (`npm run airdrop`)
+
 - Recipients: `0xf39F…2266`, `0x7099…79C8`, `0x3C44…29BC`
-- Batch airdrop `0x3d0cd2ec932a47a97c1900cbc1ed60ba907f733956f9021af1c9807c4d1e3838`
-  - Block `26`, gas used `58,647`, fee `119,171,912,245,494 wei`
-- Singles total (three transfers) gas `102,824`, fee `208,160,495,368,028 wei`
-- Gas-aware design: custom errors (`CapExceeded`, `ArrayLengthMismatch`), cap checks inside `airdrop`, minimal calldata arrays, unchecked loops, and a single transaction combine for ≈`42.96%` gas savings in this run.
+- Batch Tx `0x3d0cd2ec932a47a97c1900cbc1ed60ba907f733956f9021af1c9807c4d1e3838`
+  - Block `26`, Gas `58,647`, Fee `119,171,912,245,494 wei`
+- Three individual transfers (same distribution)
+  - Aggregate Gas `102,824`, Fee `208,160,495,368,028 wei`
+- **Gas saving:** ≈ `42.96%`
 
-## Part D — Logs & Events (`npm run logs`)
-- `RoleGranted` events at block `11` confirm admin/minter/pauser assignments
-- Deployment mint, scripted transfer/approve, batch mint, and comparison transfers recorded across blocks `11–29`
-- Full output: `logs-query-output.txt`
+Design choices enabling the savings:
+- Cap enforcement and custom `CapExceeded` / `ArrayLengthMismatch` errors to pre-empt wasted gas.
+- Tight calldata (parallel address/amount arrays) and unchecked loops for lower overhead.
+- Single transaction amortises base fee and signature costs.
 
-## Part E — Submission Checklist
-1. Artifacts: contract (`contracts/CampusCreditV2.sol`), scripts, Hardhat config, `.env.example`, README.
-2. Console logs: `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`.
-3. MetaMask evidence: `screenshots/Network Details.png`, `screenshots/Token Details.png`, and
-   `screenshots/Transacation Details.png` document the custom network, token import, and MetaMask
-   transfer hash on DIDLab.
-4. Short write-up above covers cap/pause/roles enforcement and batch gas savings.
+### 2.3 Fee & Event Analysis (`npm run logs`)
 
-_Rerun the scripts with your team’s `.env` (Member B can reuse the deployed `TOKEN_ADDRESS`) to reproduce the DIDLab workflow._
+The analyzer confirmed:
+- Role assignments emitted during deployment (admin, minter, pauser).
+- Transfers/approvals from the interaction and airdrop scripts.
+- Batch mint events followed by comparison transfers.
+
+![Analyze script output](screenshots/cli-analyze.png)
+
+---
+
+## 3. MetaMask Evidence (DIDLab Network)
+
+| Screenshot | Description |
+| --- | --- |
+| ![Network configuration](screenshots/network-details.png) | Custom network `DIDLab Team 01` added with RPC `https://hh-01.didlab.org`, chain ID `31337`, symbol `ETH`. |
+| ![Token import](screenshots/token-details.png) | `DidLabToken (DLAB)` imported using `0x610178dA211FEF7D417bC0e6FeD39F05609AD788`; balances visible for the faucet account. |
+| ![On-chain transfer details](screenshots/transaction-details.png) | MetaMask transaction hash for a token transfer on DIDLab, matching the `logs` output. |
+
+---
+
+## 4. Requirement Checklist
+
+| Requirement | Status | Evidence |
+| --- | --- | --- |
+| Hardhat v3 + Viem project scaffolded (ESM) | ✅ | `package.json`, `hardhat.config.ts` |
+| Contract extends ERC20 + Burnable + Pausable + Capped + AccessControl | ✅ | `contracts/CampusCreditV2.sol` |
+| Roles & Cap enforced, custom errors provided | ✅ | `CapExceeded`, `ArrayLengthMismatch` in contract |
+| Deploy script prints tx hash, address, block | ✅ | `deploy-output.txt`, screenshot above |
+| Transfer & approve script prints balances, hashes, gas, fees | ✅ | `transfer-approve-output.txt`, screenshot above |
+| Batch airdrop vs singles gas comparison with % saved | ✅ | `airdrop-output.txt` |
+| Logs query script decodes Transfer/Approval events | ✅ | `logs-query-output.txt`, screenshot above |
+| MetaMask network + token + tx screenshots | ✅ | Section 3 (three images) |
+| Documentation updated (README + report) | ✅ | Current file & `Assignment-3/README.md` |
+
+---
+
+## 5. Reproducing the Workflow
+
+1. **Install dependencies:** `npm install`
+2. **Populate `.env`:** use your team RPC/chain ID/private key; set optional `AIRDROP_RECIPIENTS`.
+3. **Compile & deploy:** `npm run compile` → `npm run deploy`; record the printed `TOKEN_ADDRESS`.
+4. **Interact & approve:** `npm run xfer`; copy the hashes for the report.
+5. **Batch vs singles:** `npm run airdrop`; note the gas savings.
+6. **Analyze logs:** `npm run logs`; keep the console output for submissions.
+7. **MetaMask:** add the DIDLab network, import the faucet key & token, send a transfer, and capture screenshots.
+
+Following these steps with your own `.env` values will regenerate every artefact listed above. All raw outputs, scripts, and screenshots are committed under `Assignment-3/` for convenient review.
+
+---
+
+**Deliverable bundle:** contract + scripts + outputs + screenshots + this report reside in the assignment folder, ensuring the professor can verify every requirement directly from the repository.

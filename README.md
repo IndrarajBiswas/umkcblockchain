@@ -16,7 +16,7 @@ own directory with code, documentation, and submission artefacts.
 - [Assignment 3 – CampusCreditV2 (Production-Style) on DIDLab](./Assignment-3)
   - Hardhat v3 + Viem project with cap/pause/roles and batch airdrop support (`CampusCreditV2`)
   - Scripts for deploy, transfer/approve, batch vs singles gas comparison, and logs query
-  - Live DIDLab data recorded in `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`, plus MetaMask network/token/tx screenshots
+  - Live DIDLab data recorded in `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`, plus MetaMask network/token/tx screenshots (`screenshots/network-details.png`, `screenshots/token-details.png`, `screenshots/transaction-details.png`)
 
 Each assignment folder includes a README with step-by-step instructions, environment requirements,
 and links to the relevant artefacts. Run the workflows with your own `.env` credentials to reproduce
