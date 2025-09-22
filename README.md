@@ -1,23 +1,28 @@
 # UMKC Blockchain Assignments
 
-This repository collects all blockchain coursework for the semester. Each assignment lives in its
-own directory with code, documentation, and submission artefacts.
+This repository aggregates the three major blockchain assignments completed for the UMKC course. Each
+assignment folder contains the full codebase, step-by-step README, comprehensive report, raw CLI
+outputs, and screenshots so the professor (and the public) can inspect every deliverable without
+rerunning the work.
 
-## Assignment Overview
+## Repository Map
 
-- [Assignment 1 – Mini Blockchain Extension](./Assignment-1)
-  - Node.js prototype with Proof-of-Work (difficulty ≥ 3)
-  - ≥ 5 transactions per block with chain validation demo
-  - Reflection on immutability and PoW cost
-- [Assignment 2 – CampusCredit on DIDLab](./Assignment-2)
-  - Hardhat v3 + Viem workflow targeting the DIDLab Team 01 network
-  - Deploys `CampusCredit` ERC‑20, performs two transfers + one approval, and analyses fees/events
-  - Outputs: `deploy-output.txt`, `interact-output.txt`, `analyze-output.txt`, updated `report.md`
-- [Assignment 3 – CampusCreditV2 (Production-Style) on DIDLab](./Assignment-3)
-  - Hardhat v3 + Viem project with cap/pause/roles and batch airdrop support (`CampusCreditV2`)
-  - Scripts for deploy, transfer/approve, batch vs singles gas comparison, and logs query
-  - Live DIDLab data recorded in `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`, plus MetaMask network/token/tx screenshots (`screenshots/network-details.png`, `screenshots/token-details.png`, `screenshots/transaction-details.png`)
+| Assignment | Focus | Highlights |
+| --- | --- | --- |
+| [Assignment 1 — Mini Blockchain](./Assignment-1) | Node.js prototype illustrating hashing + Proof-of-Work | Mines three blocks with difficulty ≥ 3, validates integrity, and demonstrates tamper detection. |
+| [Assignment 2 — CampusCredit on DIDLab](./Assignment-2) | Hardhat v3 + Viem deployment & transaction analysis | Deploys ERC‑20 to DIDLab, runs scripted transfers/approvals, analyses gas fees, and documents evidence with screenshots. |
+| [Assignment 3 — CampusCreditV2 Production Rollout](./Assignment-3) | Production-grade ERC‑20 with operational tooling | Adds cap/pause/roles, batch airdrop optimisation, MetaMask verification, and an extensive report of on-chain activity. |
 
-Each assignment folder includes a README with step-by-step instructions, environment requirements,
-and links to the relevant artefacts. Run the workflows with your own `.env` credentials to reproduce
-the results.
+## What You’ll Find Inside Each Assignment
+
+- **README.md** — A polished runbook describing prerequisites, exact commands, and embedded
+  screenshots of the workflow.
+- **report.md** — A narrative submission with tables, transaction summaries, gas analysis, and linked
+  evidence.
+- **Scripts & Contracts** — Source code for deployments, interactions, and analytics, along with
+  Hardhat/TypeScript configuration.
+- **Outputs & Screenshots** — Raw console logs captured via `tee` and PNG captures of every major step
+  (both CLI and MetaMask where applicable).
+
+Re-run the documented commands with your own `.env` secrets to regenerate the artefacts. The
+combination of code, reports, and visuals shows exactly how each assignment was completed end to end.
