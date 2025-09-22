@@ -73,6 +73,8 @@ is stored in `logs-query-output.txt`.
 2. Import the faucet private key as a temporary account.
 3. Import `TOKEN_ADDRESS` and verify balances.
 4. Send a token transfer in MetaMask and confirm it appears in `npm run logs`.
+   - Evidence stored in `screenshots/Network Details.png`, `screenshots/Token Details.png`, and
+     `screenshots/Transacation Details.png`.
 
 ## 5. Deliverables & Evidence
 

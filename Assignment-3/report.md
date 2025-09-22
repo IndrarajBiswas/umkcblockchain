@@ -37,7 +37,9 @@ _All data below was collected on the live DIDLab Team 01 network (RPC `https://h
 ## Part E — Submission Checklist
 1. Artifacts: contract (`contracts/CampusCreditV2.sol`), scripts, Hardhat config, `.env.example`, README.
 2. Console logs: `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`.
-3. MetaMask evidence (capture next): custom network, token import, on-chain tx hash.
+3. MetaMask evidence: `screenshots/Network Details.png`, `screenshots/Token Details.png`, and
+   `screenshots/Transacation Details.png` document the custom network, token import, and MetaMask
+   transfer hash on DIDLab.
 4. Short write-up above covers cap/pause/roles enforcement and batch gas savings.
 
 _Rerun the scripts with your team’s `.env` (Member B can reuse the deployed `TOKEN_ADDRESS`) to reproduce the DIDLab workflow._
