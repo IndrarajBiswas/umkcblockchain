@@ -1,87 +1,119 @@
-# Assignment 3 — Build, Deploy & Operate a Production-Style ERC-20 on DIDLab
+# Assignment 3 — Production-Style ERC-20 on DIDLab
 
-This directory mirrors the professor's revised Activity 3 playbook. It uses Hardhat v3 (ESM)
-and Viem to deploy and operate the `CampusCreditV2` ERC-20 with cap, pause, role-based
-minting, and a gas-aware batch airdrop. The workflow below has been validated directly on the
-DIDLab Team 01 RPC (`https://hh-01.didlab.org`, chainId `31337`).
+Assignment 3 scales the DIDLab workflow into a production-style ERC‑20 with supply cap, pausing, role
+management, and an optimized batch airdrop. Everything is automated with Hardhat v3 (ESM) and Viem so
+that the professor can reproduce the exact deployment, operations, and analysis steps from the
+repository.
 
-## 0. Environment & Prerequisites
+## Quick Facts
 
-- Node.js 22.x (LTS), npm, Git, VS Code, MetaMask
-- Copy `.env.example` → `.env` and populate:
-  - `RPC_URL`, `CHAIN_ID`, `PRIVATE_KEY`
-  - `TOKEN_NAME`, `TOKEN_SYMBOL`, `TOKEN_CAP`, `TOKEN_INITIAL`
-  - Optional `RECIPIENT`, `AIRDROP_RECIPIENTS`
-  - Append `TOKEN_ADDRESS` after deployment
-- `.env.example` includes ready-to-use values for Team 01 (Member A & Member B)
+| Item | Details |
+| --- | --- |
+| Network | DIDLab Team 01 — `https://hh-01.didlab.org`, chain ID `31337` |
+| Token | `CampusCreditV2` (`DidLabToken`, symbol `DLAB`, cap 2,000,000) |
+| Features | Capped supply, pausability, role-based minting, gas-aware batch airdrop |
+| Tooling | Hardhat v3 (ESM) + Viem + TypeScript scripts |
+| Evidence | `report.md`, CLI outputs (`*-output.txt`), screenshots (`screenshots/*.png`) |
 
-## 1. Install & Compile
+## Repository Tour
 
-```bash
-npm install
-npm run compile
+```
+Assignment-3/
+├── contracts/CampusCreditV2.sol    # ERC-20 with cap, pause, AccessControl, and batch airdrop helper
+├── scripts/                        # deploy, transfer/approve, airdrop, and logs query scripts
+├── report.md                       # Detailed runbook with tables & embedded screenshots
+├── screenshots/                    # CLI + MetaMask evidence
+├── hardhat.config.ts               # Solidity 0.8.24 + DIDLab network configuration
+└── package.json                    # Hardhat v3 + Viem dependencies
 ```
 
-`hardhat.config.ts` targets Solidity 0.8.24 (optimizer 200) and registers a `didlab` network
-that pulls connection details from `.env`.
+## Setup
 
-## 2. Deploy (EIP-1559)
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+2. **Create `.env`** by copying `.env.example` and filling in:
+   - `RPC_URL`, `CHAIN_ID`, `PRIVATE_KEY`
+   - `TOKEN_NAME`, `TOKEN_SYMBOL`, `TOKEN_CAP`, `TOKEN_INITIAL`
+   - Optional `RECIPIENT` (used by transfer/approve script) and `AIRDROP_RECIPIENTS`
+   - After deploying, append `TOKEN_ADDRESS`
+3. **Compile the contracts**
+   ```bash
+   npm run compile
+   ```
 
-```bash
-npm run deploy
-# record the deploy hash, contract address, block → update TOKEN_ADDRESS
-```
+`hardhat.config.ts` already exposes the `didlab` network, pulling connection details from the
+environment file.
 
-Latest deployment: `TOKEN_ADDRESS=0x610178dA211FEF7D417bC0e6FeD39F05609AD788` (see
-`deploy-output.txt`).
+## Workflow
 
-## 3. Operate the Token
+> Commands below are executed inside `Assignment-3/`.
 
-### Transfer & Approve
-
-```bash
-npm run xfer
-```
-
-`scripts/transfer-approve.ts` shows balances before/after, the transfer & approve transaction
-hashes, block numbers, gas used, and total fees. Output captured in
-`transfer-approve-output.txt`.
-
-### Batch Airdrop vs Singles
+### 1. Deploy with EIP-1559 Fees
 
 ```bash
-npm run airdrop
+npm run deploy | tee deploy-output.txt
 ```
 
-`scripts/airdrop.ts` reads `AIRDROP_RECIPIENTS` (comma separated) or falls back to an inline
-default list. It mints 10 CAMP per recipient using the contract `airdrop`, then replays the
-same distribution with individual transfers. Gas totals and percent savings are logged in
-`airdrop-output.txt`.
+The script deploys `CampusCreditV2`, prints the transaction hash, block, and contract address, and
+assigns admin/minter/pauser roles to the deployer.
 
-### Event Logs
+![Deployment CLI output](screenshots/cli-deploy.png)
+
+### 2. Transfer & Approve Script
 
 ```bash
-npm run logs
+npm run xfer | tee transfer-approve-output.txt
 ```
 
-`scripts/logs-query.ts` scans the last ~2000 blocks for Transfer/Approval events. Sample output
-is stored in `logs-query-output.txt`.
+- Transfers **100 DLAB** to the teammate (balance delta shown).
+- Approves **50 DLAB** allowance for the teammate.
+- Logs gas used, fees paid, and the decoded events for transparency.
 
-## 4. MetaMask Checklist
+![Transfer and approve CLI output](screenshots/cli-transfer-approve.png)
 
-1. Add Network → Name `DIDLab Team 01`, RPC `https://hh-01.didlab.org`, Chain ID `31337`, symbol `ETH`.
-2. Import the faucet private key as a temporary account.
-3. Import `TOKEN_ADDRESS` and verify balances.
-4. Send a token transfer in MetaMask and confirm it appears in `npm run logs`.
-   - Evidence stored in `screenshots/network-details.png`, `screenshots/token-details.png`, and
-     `screenshots/transaction-details.png`.
+### 3. Batch Airdrop vs Singles
 
-## 5. Deliverables & Evidence
+```bash
+npm run airdrop | tee airdrop-output.txt
+```
 
-- Contract: `contracts/CampusCreditV2.sol`
-- Scripts: `scripts/deploy.ts`, `scripts/transfer-approve.ts`, `scripts/airdrop.ts`, `scripts/logs-query.ts`
-- Outputs: `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`, `logs-query-output.txt`
-- Report: `report.md`
-- Screenshots: store MetaMask/network evidence under `screenshots/`
+The script mints tokens via the smart-contract `airdrop` helper and immediately replays the
+distribution as individual transfers. It calculates gas totals and percentage savings to showcase the
+benefit of batching.
 
-Run the same commands with your team-specific `.env` (or Member B’s key + `TOKEN_ADDRESS`) to recreate the DIDLab workflow.
+![Batch airdrop CLI output](screenshots/cli-analyze.png)
+
+### 4. Logs & Event History
+
+```bash
+npm run logs | tee logs-query-output.txt
+```
+
+This command scans recent blocks for `Transfer` and `Approval` events, verifying that on-chain history
+matches the scripted interactions.
+
+![Logs query CLI output](screenshots/cli/analyze-network.png)
+
+### 5. MetaMask Verification
+
+Screenshots under `screenshots/` demonstrate the DIDLab network configuration, token import, and an
+on-chain token transfer performed via MetaMask.
+
+| Screenshot | Description |
+| --- | --- |
+| ![DIDLab network configuration](screenshots/network-details.png) | Custom network with RPC `https://hh-01.didlab.org` and chain ID `31337`. |
+| ![Token import](screenshots/token-details.png) | `DidLabToken (DLAB)` imported using the deployed address. |
+| ![Transaction details](screenshots/transaction-details.png) | MetaMask transaction hash aligning with the CLI logs. |
+
+## Submission Checklist
+
+- ✅ `report.md` — comprehensive narrative with tables, gas analysis, and embedded screenshots.
+- ✅ Output files — `deploy-output.txt`, `transfer-approve-output.txt`, `airdrop-output.txt`,
+  `logs-query-output.txt` (captured via `tee`).
+- ✅ Source — contracts and scripts that generated every artefact.
+- ✅ Screenshots — CLI evidence (`screenshots/cli-*.png`) plus MetaMask proof.
+
+Follow the workflow with your own `.env` secrets to regenerate the data; update `TOKEN_ADDRESS` and
+report hashes before submission.

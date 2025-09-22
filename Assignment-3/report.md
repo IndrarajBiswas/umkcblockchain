@@ -2,6 +2,24 @@
 
 _All activities were completed on the live DIDLab Team 01 network (`https://hh-01.didlab.org`, chain ID `31337`). The `CampusCreditV2` token extends OpenZeppelin’s ERC‑20 with a hard supply cap, pausing, granular roles, and a batch airdrop designed for gas efficiency._
 
+## Environment Snapshot
+
+| Item | Value |
+| --- | --- |
+| Solidity compiler | 0.8.24 (optimizer 200 runs) |
+| Hardhat | v3 (ESM) + Viem client |
+| Accounts | Deployer `0xf39F…2266`, Teammate `0x7099…79C8` |
+| Token parameters | Name `DidLabToken`, Symbol `DLAB`, Cap `2,000,000`, Initial mint `1,000,000` |
+
+## Token Feature Overview
+
+- **Supply cap enforcement:** Leverages OpenZeppelin’s `ERC20Capped` mixin with a custom
+  `CapExceeded` error for clear diagnostics.
+- **Operational safety:** `Pausable` + `AccessControl` allow administrators to halt transfers and
+  delegate minting to authorised addresses.
+- **Gas-aware distribution:** A dedicated `airdrop` helper accepts parallel arrays and mints in one
+  transaction to minimise base fee + signature costs compared to individual transfers.
+
 ---
 
 ## 1. Deployment Summary
@@ -50,6 +68,8 @@ Design choices enabling the savings:
 - Tight calldata (parallel address/amount arrays) and unchecked loops for lower overhead.
 - Single transaction amortises base fee and signature costs.
 
+![Batch airdrop CLI output](screenshots/cli-analyze.png)
+
 ### 2.3 Fee & Event Analysis (`npm run logs`)
 
 The analyzer confirmed:
@@ -57,7 +77,7 @@ The analyzer confirmed:
 - Transfers/approvals from the interaction and airdrop scripts.
 - Batch mint events followed by comparison transfers.
 
-![Analyze script output](screenshots/cli-analyze.png)
+![Analyze script output](screenshots/cli/analyze-network.png)
 
 ---
 
