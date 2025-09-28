@@ -12,6 +12,7 @@ rerunning the work.
 | [Assignment 1 — Mini Blockchain](./Assignment-1) | Node.js prototype illustrating hashing + Proof-of-Work | Mines three blocks with difficulty ≥ 3, validates integrity, and demonstrates tamper detection. |
 | [Assignment 2 — CampusCredit on DIDLab](./Assignment-2) | Hardhat v3 + Viem deployment & transaction analysis | Deploys ERC‑20 to DIDLab, runs scripted transfers/approvals, analyses gas fees, and documents evidence with screenshots. |
 | [Assignment 3 — CampusCreditV2 Production Rollout](./Assignment-3) | Production-grade ERC‑20 with operational tooling | Adds cap/pause/roles, batch airdrop optimisation, MetaMask verification, and an extensive report of on-chain activity. |
+| [Assignment 4 — DIDLab ERC-20 DApp UI](./Assignment-4) | Browser-based viem DApp for DIDLab ERC-20 | Single-file UI connects MetaMask, loads token metadata, tracks balances, handles transfers, and ships with a submission-ready checklist. |
 
 ## What You’ll Find Inside Each Assignment
 
