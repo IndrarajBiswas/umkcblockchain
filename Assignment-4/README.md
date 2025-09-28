@@ -9,7 +9,7 @@ These are the live values for our DIDLab deployment:
 - **Team**: `01`
 - **RPC URL**: `https://hh-01.didlab.org`
 - **Chain ID (decimal)**: `31337`
-- **Token Address**: `TBD (DidLabToken once deployed)`
+- **Token Address**: `0x610178dA211FEF7D417bC0e6FeD39F05609AD788`
 
 ## Running the DApp
 
@@ -35,9 +35,11 @@ Use the following `.env` values when running scripts or backend tooling. Keep pr
 RPC_URL=https://hh-01.didlab.org
 CHAIN_ID=31337
 PRIVKEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+TEAM=01
 TOKEN_NAME=DidLabToken
 TOKEN_SYMBOL=DLAB
 TOKEN_SUPPLY=1000000
+TOKEN_ADDRESS=0x610178dA211FEF7D417bC0e6FeD39F05609AD788
 
 # Member B
 RPC_URL=https://hh-01.didlab.org
@@ -45,6 +47,8 @@ CHAIN_ID=31337
 PRIVKEY=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
 # Member B inherits token details from Member A.
 ```
+
+Create `Assignment-4/.env` from `.env.example` (committed) so both members stay aligned.
 
 ## Requirement Mapping
 

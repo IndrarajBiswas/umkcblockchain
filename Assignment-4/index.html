@@ -191,18 +191,33 @@
     const balEl = el("bal");
     const txlog = el("txlog");
 
+    const DEFAULTS = {
+      team: "01",
+      token: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      tokenName: "DidLabToken",
+      tokenSymbol: "DLAB"
+    };
+
     let chain;
     let token;
     let decimals = 18;
-    let symbol = "DLAB";
-    let name = "DidLabToken";
+    let symbol = DEFAULTS.tokenSymbol;
+    let name = DEFAULTS.tokenName;
     let walletClient;
     let publicClient;
     let account;
 
     const saved = JSON.parse(localStorage.getItem("didlab-ui") || "{}");
-    if (saved.team) teamSel.value = saved.team;
-    if (saved.token) tokenInput.value = saved.token;
+    if (saved.team) {
+      teamSel.value = saved.team;
+    } else {
+      teamSel.value = DEFAULTS.team;
+    }
+    if (saved.token) {
+      tokenInput.value = saved.token;
+    } else {
+      tokenInput.value = DEFAULTS.token;
+    }
 
     function save() {
       localStorage.setItem("didlab-ui", JSON.stringify({
