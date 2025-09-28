@@ -4,12 +4,12 @@ This folder contains the "Minimal DApp" deliverable: a single-file web applicati
 
 ## Team Metadata
 
-Update these values before submission so graders can verify on your chain:
+These are the live values for our DIDLab deployment:
 
-- **Team**: `TBD`
-- **RPC URL**: `https://hh-XX.didlab.org`
-- **Chain ID (decimal)**: `31XXX`
-- **Token Address**: `0x...`
+- **Team**: `01`
+- **RPC URL**: `https://hh-01.didlab.org`
+- **Chain ID (decimal)**: `31337`
+- **Token Address**: `TBD (DidLabToken once deployed)`
 
 ## Running the DApp
 
@@ -25,6 +25,26 @@ Update these values before submission so graders can verify on your chain:
    Alternatively: `npx http-server -p 8000`.
 4. Open [http://localhost:8000](http://localhost:8000) in a MetaMask-enabled browser profile.
 5. Select your team (01–12), paste your ERC-20 token address, then click **Connect & Switch Network** followed by **Load Token**. Use the remaining buttons to refresh balances, transfer tokens, or add the token to MetaMask.
+
+## Team Wallet Environment
+
+Use the following `.env` values when running scripts or backend tooling. Keep private keys secure and avoid sharing them outside the team repository.
+
+```env
+# Member A
+RPC_URL=https://hh-01.didlab.org
+CHAIN_ID=31337
+PRIVKEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+TOKEN_NAME=DidLabToken
+TOKEN_SYMBOL=DLAB
+TOKEN_SUPPLY=1000000
+
+# Member B
+RPC_URL=https://hh-01.didlab.org
+CHAIN_ID=31337
+PRIVKEY=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
+# Member B inherits token details from Member A.
+```
 
 ## Requirement Mapping
 
