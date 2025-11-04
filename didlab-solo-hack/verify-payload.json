@@ -1,0 +1,4 @@
+{
+  "message": "blockchain.didlab.org wants you to sign in with your Ethereum account:\n0x41BAc3886F5ba782416E0324A9E84CFDfd85b9DA\n\nSign in to DIDLab API\n\nURI: https://blockchain.didlab.org\nVersion: 1\nChain ID: 252501\nNonce: VcPXIy5y4nBboOrjX\nIssued At: 2025-11-04T16:52:13.092Z",
+  "signature": "0xa7deb07ff1f083c00f81bb29b0b3495c1bcc2913e5435c17a3c4879196d51d5978e405e591f30f6135083efc690ac809deca4fc8e9fed48de9ddb81a2d48209c1c"
+}

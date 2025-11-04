@@ -1,0 +1,19 @@
+{
+  "name": "DIDLab Hackathon Badge (Solo)",
+  "description": "70-minute solo proof-of-build demonstrating ERC-721 deployment, SIWE authentication, and IPFS integration on DIDLab network",
+  "image": "ipfs://QmWqaMUoDryUA8Gsm6EV9DEimeAedgANGhLZBj7651JFcN",
+  "attributes": [
+    {
+      "trait_type": "wallet",
+      "value": "0x41BAc3886F5ba782416E0324A9E84CFDfd85b9DA"
+    },
+    {
+      "trait_type": "contract",
+      "value": "0xfccA47616fEF20026A093d7e2a98001d1a30F889"
+    },
+    {
+      "trait_type": "chain",
+      "value": "DIDLab (252501)"
+    }
+  ]
+}
