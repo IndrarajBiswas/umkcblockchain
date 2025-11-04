@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { artifacts } from "hardhat";
+import campusCreditV2Artifact from "../static-artifacts/CampusCreditV2.json" assert { type: "json" };
 import { createWalletClient, createPublicClient, http, parseUnits, getAddress } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
@@ -14,11 +14,11 @@ const INIT_HUMAN = process.env.TOKEN_INITIAL || "1000000";
 async function main() {
   if (!RPC_URL || !CHAIN_ID || !PRIVATE_KEY) throw new Error("Missing env vars");
 
-  const { abi, bytecode } = await artifacts.readArtifact("CampusCreditV2");
+  const { abi, bytecode } = campusCreditV2Artifact as { abi: any; bytecode: `0x${string}` };
   const chain = {
     id: CHAIN_ID,
-    name: `didlab-${CHAIN_ID}`,
-    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    name: "DIDLab TrustNet",
+    nativeCurrency: { name: "Trust", symbol: "TT", decimals: 18 },
     rpcUrls: { default: { http: [RPC_URL] } },
   } as const;
 

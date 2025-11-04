@@ -1,4 +1,4 @@
-import { artifacts } from "hardhat";
+import campusCreditArtifact from "../static-artifacts/CampusCredit.json" assert { type: "json" };
 import { createWalletClient, createPublicClient, http, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 
@@ -11,12 +11,12 @@ async function main() {
     throw new Error("Missing env RPC_URL/CHAIN_ID/PRIVATE_KEY");
   }
 
-  const { abi, bytecode } = await artifacts.readArtifact("CampusCredit");
+  const { abi, bytecode } = campusCreditArtifact as { abi: any; bytecode: `0x${string}` };
 
   const chain = {
     id: CHAIN_ID,
-    name: `didlab-${CHAIN_ID}`,
-    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    name: "DIDLab TrustNet",
+    nativeCurrency: { name: "Trust", symbol: "TT", decimals: 18 },
     rpcUrls: { default: { http: [RPC_URL] } },
   } as const;
 

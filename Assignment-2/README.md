@@ -9,7 +9,7 @@ expects (scripts, outputs, screenshots, and the written report) is included in t
 
 | Item | Details |
 | --- | --- |
-| Network | DIDLab Team 01 — `https://hh-01.didlab.org`, chain ID `31337` |
+| Network | DIDLab TrustNet — `https://eth.didlab.org`, chain ID `252501` |
 | Token | `CampusCredit` (symbol `CAMP`, 18 decimals, 1,000,000 initial supply) |
 | Tooling | Hardhat v3 (ESM) + Viem client, TypeScript scripts |
 | Evidence | `deploy-output.txt`, `interact-output.txt`, `analyze-output.txt`, [`report.md`](./report.md), screenshots below |
@@ -29,33 +29,32 @@ Assignment-2/
 ## Prerequisites
 
 1. **Node.js 22.x LTS** – Hardhat v3 requires Node ≥ 18; the repo was built/tested with Node 22.
-2. **DIDLab credentials** – RPC URL, chain ID, faucet private key, and teammate account.
-3. **Environment file** – Copy `.env.example` → `.env` and fill in:
-   - `RPC_URL`, `CHAIN_ID`, `PRIVATE_KEY`
-   - `ACCT2` (teammate address for transfers)
-   - `TOKEN_ADDRESS` (populate after deploying)
+2. **TrustNet credentials** – Public RPC endpoint, chain ID `252501`, a funded private key, and the
+   teammate address that should receive transfers.
+3. **Environment file** – Copy `.env.example` → `.env` and fill in the values above plus the hashes
+   emitted by the interaction script once you rerun it on TrustNet.
 
-`.env.example` already contains the Team 01 defaults used to generate the committed outputs, so
-Member B can simply drop in their faucet private key.
+`.env.example` is pre-filled with the TrustNet RPC and the teammate wallet supplied in the ticket so
+you only need to paste your deployer key before running the scripts.
 
 ## Step-by-Step Workflow
 
 > All commands are run from the `Assignment-2/` directory.
 
-### 1. Install & Compile
+### 1. Install Dependencies
 
 ```bash
 npm install
-npx hardhat compile
 ```
 
-Hardhat compiles `CampusCredit.sol` with Solidity 0.8.24. Compilation artefacts are stored under
-`artifacts/` (ignored from git).
+The repository ships with `static-artifacts/CampusCredit.json` so you can deploy
+without downloading the Solidity compiler. If you want to regenerate the artefact yourself, install
+an outbound-friendly toolchain and run `npx hardhat compile`.
 
 ### 2. Deploy to DIDLab
 
 ```bash
-npx hardhat run scripts/deploy.ts --network didlab | tee deploy-output.txt
+npx hardhat run --no-compile scripts/deploy.ts --network didlab | tee deploy-output.txt
 ```
 
 The deploy script prints the transaction hash, block number, and the resulting contract address. The
@@ -66,7 +65,7 @@ most recent run produced `TOKEN_ADDRESS=0x67D269191c92Caf3cd7723F116c85E6E9BF559
 ### 3. Generate Transactions
 
 ```bash
-npx hardhat run scripts/interact.ts --network didlab | tee interact-output.txt
+npx hardhat run --no-compile scripts/interact.ts --network didlab | tee interact-output.txt
 ```
 
 This script:
@@ -79,10 +78,10 @@ This script:
 ### 4. Analyse Fees & Events
 
 ```bash
-export TX1_HASH=0x3510ce729bec7c4479eda4cfe1b3079e39df0027297b54795ed460d71394adec
-export TX2_HASH=0xdb2225f0e0e9d3aedd3736b035a1cde10de98268b179d9c3d404205b621d2a97
-export TX3_HASH=0x68f2fcfe83f56aeb99db53cb2aeb2072346eb06d7ff2ee1afdcb9447579866f8
-npx hardhat run scripts/analyze.ts --network didlab | tee analyze-output.txt
+export TX1_HASH=0x...
+export TX2_HASH=0x...
+export TX3_HASH=0x...
+npx hardhat run --no-compile scripts/analyze.ts --network didlab | tee analyze-output.txt
 ```
 
 The analyzer fetches full transaction receipts, block metadata, and decoded ERC‑20 logs for each

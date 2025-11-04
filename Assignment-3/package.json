@@ -7,10 +7,10 @@
   "scripts": {
     "test": "node --test",
     "compile": "hardhat compile",
-    "deploy": "hardhat run scripts/deploy.ts --network didlab",
-    "xfer": "hardhat run scripts/transfer-approve.ts --network didlab",
-    "airdrop": "hardhat run scripts/airdrop.ts --network didlab",
-    "logs": "hardhat run scripts/logs-query.ts --network didlab"
+    "deploy": "hardhat run --no-compile scripts/deploy.ts --network didlab",
+    "xfer": "hardhat run --no-compile scripts/transfer-approve.ts --network didlab",
+    "airdrop": "hardhat run --no-compile scripts/airdrop.ts --network didlab",
+    "logs": "hardhat run --no-compile scripts/logs-query.ts --network didlab"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^3.0.3",
@@ -19,14 +19,15 @@
     "@nomicfoundation/hardhat-network-helpers": "^3.0.0",
     "@nomicfoundation/hardhat-node-test-runner": "^3.0.3",
     "@nomicfoundation/hardhat-toolbox-viem": "^5.0.0",
+    "@nomicfoundation/hardhat-verify": "^3.0.2",
     "@nomicfoundation/hardhat-viem": "^3.0.0",
     "@nomicfoundation/hardhat-viem-assertions": "^3.0.2",
-    "@nomicfoundation/hardhat-verify": "^3.0.2",
     "@nomicfoundation/ignition-core": "^3.0.3",
     "@types/node": "^22.8.5",
     "dotenv": "^16.4.5",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
     "hardhat": "^3.0.6",
+    "solc": "^0.8.24",
     "typescript": "~5.8.0",
     "viem": "^2.37.5"
   },

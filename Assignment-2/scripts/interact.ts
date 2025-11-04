@@ -1,4 +1,3 @@
-import { artifacts } from "hardhat";
 import {
   createWalletClient,
   createPublicClient,
@@ -8,6 +7,7 @@ import {
   getAddress,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
+import campusCreditArtifact from "../static-artifacts/CampusCredit.json" assert { type: "json" };
 
 const RPC_URL = process.env.RPC_URL!;
 const CHAIN_ID = Number(process.env.CHAIN_ID!);
@@ -24,11 +24,11 @@ async function main() {
     throw new Error("Set TOKEN in scripts/interact.ts or TOKEN_ADDRESS env var");
   }
 
-  const { abi } = await artifacts.readArtifact("CampusCredit");
+  const { abi } = campusCreditArtifact as { abi: any };
   const chain = {
     id: CHAIN_ID,
-    name: `didlab-${CHAIN_ID}`,
-    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    name: "DIDLab TrustNet",
+    nativeCurrency: { name: "Trust", symbol: "TT", decimals: 18 },
     rpcUrls: { default: { http: [RPC_URL] } },
   } as const;
 

@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { artifacts } from "hardhat";
+import campusCreditV2Artifact from "../static-artifacts/CampusCreditV2.json" assert { type: "json" };
 import { createPublicClient, http, decodeEventLog } from "viem";
 
 const RPC_URL = process.env.RPC_URL!;
@@ -9,11 +9,11 @@ const TOKEN = process.env.TOKEN_ADDRESS as `0x${string}`;
 async function main() {
   if (!RPC_URL || !CHAIN_ID || !TOKEN) throw new Error("Missing env");
 
-  const { abi } = await artifacts.readArtifact("CampusCreditV2");
+  const { abi } = campusCreditV2Artifact as { abi: any };
   const chain = {
     id: CHAIN_ID,
-    name: `didlab-${CHAIN_ID}`,
-    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    name: "DIDLab TrustNet",
+    nativeCurrency: { name: "Trust", symbol: "TT", decimals: 18 },
     rpcUrls: { default: { http: [RPC_URL] } },
   } as const;
 
