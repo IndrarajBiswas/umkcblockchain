@@ -1,5 +1,4 @@
 const hre = require("hardhat");
-const fs = require("fs");
 require("dotenv").config();
 
 async function main(){
@@ -11,8 +10,21 @@ async function main(){
 
   const Badge = await hre.ethers.getContractAt("DidLabBadge", badgeAddress);
 
+  const gasPriceGwei = process.env.GAS_PRICE_GWEI || "20";
+  const gasPrice = hre.ethers.utils.parseUnits(gasPriceGwei, "gwei");
+
+  let gasLimit;
+  if (process.env.GAS_LIMIT) {
+    gasLimit = hre.ethers.BigNumber.from(process.env.GAS_LIMIT);
+  } else {
+    const estimate = await Badge.estimateGas.mintTo(signer.address, tokenURI);
+    gasLimit = estimate.mul(120).div(100); // 20% buffer
+  }
+
   console.log("Minting NFT with tokenURI:", tokenURI);
-  const tx = await Badge.mintTo(signer.address, tokenURI);
+  console.log("Using gasPrice (gwei):", gasPriceGwei);
+  console.log("Using gasLimit:", gasLimit.toString());
+  const tx = await Badge.mintTo(signer.address, tokenURI, { gasPrice, gasLimit });
   const receipt = await tx.wait();
 
   console.log("tx:", receipt.hash);

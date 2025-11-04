@@ -8,19 +8,27 @@ This repository contains a complete implementation of an ERC-721 NFT badge syste
 - **RPC Endpoint**: https://eth.didlab.org
 - **API Endpoint**: https://api.didlab.org
 
-## Deployed Artifacts
+## On-Chain Evidence
 
-- **Network**: chainId 252501 (DIDLab)
+- **Network**: DIDLab EVM (chainId 252501)
 - **Contract Address**: `0xfccA47616fEF20026A093d7e2a98001d1a30F889`
-- **Deployer Wallet**: `0x41BAc3886F5ba782416E0324A9E84CFDfd85b9DA`
+- **Mint Tx Hash**: `0x30fabb6f523cc0962bfae64f15cb23a3d7f87a4b76a20bb911fae463a04668f3`
+- **Token ID**: `1`
+- **Token URI**: `ipfs://QmWnZVUUS4yqAvpABNBcrZapYY9RKi9Eh8FSrweZVhvNks`
 - **Image CID**: `QmWqaMUoDryUA8Gsm6EV9DEimeAedgANGhLZBj7651JFcN`
 - **Metadata CID**: `QmWnZVUUS4yqAvpABNBcrZapYY9RKi9Eh8FSrweZVhvNks`
-- **Token URI**: `ipfs://QmWnZVUUS4yqAvpABNBcrZapYY9RKi9Eh8FSrweZVhvNks`
+- **Owner**: `0x41BAc3886F5ba782416E0324A9E84CFDfd85b9DA`
 
 ## Gateway URLs
 
 - **Image**: https://gateway.didlab.org/ipfs/QmWqaMUoDryUA8Gsm6EV9DEimeAedgANGhLZBj7651JFcN
 - **Metadata**: https://gateway.didlab.org/ipfs/QmWnZVUUS4yqAvpABNBcrZapYY9RKi9Eh8FSrweZVhvNks
+
+## Evidence Screenshots
+
+![Mint transaction on explorer](evidence/screenshots/Minted%20NFTs.PNG)
+
+![IPFS metadata JSON showing image field](evidence/screenshots/json%20output.PNG)
 
 ## Repository Structure
 
@@ -105,22 +113,7 @@ npx hardhat run scripts/deploy.js --network didlab
 
 ## Reflection
 
-**What Worked:**
-- Successfully deployed ERC-721 contract to DIDLab network
-- SIWE authentication flow worked correctly after fixing message formatting (trailing newline issue)
-- IPFS uploads were smooth with the managed DIDLab node
-- Complete end-to-end workflow from contract deployment to metadata upload
-
-**Challenges:**
-- Initial confusion with RPC endpoints (documented vs. actual: `eth.didlab.org`)
-- SIWE message validation required exact character count (no trailing newlines)
-- Hardhat version compatibility required downgrading to v2.19.0
-- DIDLab blockchain has slower block times than typical testnets
-
-**Key Learnings:**
-- Importance of exact message formatting for cryptographic signatures
-- Value of structured logging and evidence collection
-- Benefits of using managed IPFS services for Web3 applications
+SIWE authentication and the Hardhat deployment pipeline worked smoothly once I locked in the correct RPC endpoint and toolbox version. IPFS uploads through the DIDLab gateway were reliable and the on-chain metadata resolved immediately in wallets. The biggest friction came from slow block times—several mint attempts piled up in the mempool until I replaced them with higher-gas transactions.
 
 ## License
 
