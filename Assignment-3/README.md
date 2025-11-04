@@ -9,8 +9,8 @@ repository.
 
 | Item | Details |
 | --- | --- |
-| Network | DIDLab Team 01 — `https://hh-01.didlab.org`, chain ID `31337` |
-| Token | `CampusCreditV2` (`DidLabToken`, symbol `DLAB`, cap 2,000,000) |
+| Network | DIDLab TrustNet — `https://eth.didlab.org`, chain ID `252501` |
+| Token | `CampusCreditV2` (`CampusCredit`, symbol `CAMP`, cap 2,000,000) |
 | Features | Capped supply, pausability, role-based minting, gas-aware batch airdrop |
 | Tooling | Hardhat v3 (ESM) + Viem + TypeScript scripts |
 | Evidence | `report.md`, CLI outputs (`*-output.txt`), screenshots (`screenshots/*.png`) |
@@ -34,17 +34,15 @@ Assignment-3/
    npm install
    ```
 2. **Create `.env`** by copying `.env.example` and filling in:
-   - `RPC_URL`, `CHAIN_ID`, `PRIVATE_KEY`
-   - `TOKEN_NAME`, `TOKEN_SYMBOL`, `TOKEN_CAP`, `TOKEN_INITIAL`
-   - Optional `RECIPIENT` (used by transfer/approve script) and `AIRDROP_RECIPIENTS`
-   - After deploying, append `TOKEN_ADDRESS`
-3. **Compile the contracts**
-   ```bash
-   npm run compile
-   ```
+   - `RPC_URL=https://eth.didlab.org`, `CHAIN_ID=252501`, and your funded deployer `PRIVATE_KEY`
+   - Optionally tweak `TOKEN_*`, `RECIPIENT`, and `AIRDROP_RECIPIENTS`
+   - After deploying, append the emitted `TOKEN_ADDRESS`
+3. *(Optional)* **Recompile** – the repo already ships with
+   `static-artifacts/CampusCreditV2.json` so you can deploy without fetching the
+   Solidity compiler. If you want to rebuild it, ensure you have outbound access and run `npm run
+   compile`.
 
-`hardhat.config.ts` already exposes the `didlab` network, pulling connection details from the
-environment file.
+`hardhat.config.ts` exposes the `didlab` network, pulling connection details from the environment file.
 
 ## Workflow
 
@@ -103,8 +101,8 @@ on-chain token transfer performed via MetaMask.
 
 | Screenshot | Description |
 | --- | --- |
-| ![DIDLab network configuration](screenshots/network-details.png) | Custom network with RPC `https://hh-01.didlab.org` and chain ID `31337`. |
-| ![Token import](screenshots/token-details.png) | `DidLabToken (DLAB)` imported using the deployed address. |
+| ![DIDLab network configuration](screenshots/network-details.png) | Custom network with RPC `https://eth.didlab.org` and chain ID `252501`. |
+| ![Token import](screenshots/token-details.png) | `CampusCredit (CAMP)` imported using the deployed address. |
 | ![Transaction details](screenshots/transaction-details.png) | MetaMask transaction hash aligning with the CLI logs. |
 
 ## Submission Checklist

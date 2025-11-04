@@ -1,20 +1,22 @@
 # Assignment 4 – DIDLab ERC-20 DApp UI
 
-This folder contains the "Minimal DApp" deliverable: a single-file web application that connects to MetaMask, switches the wallet to the appropriate DIDLab Hardhat network, and interacts with your deployed ERC-20 token.
+This folder contains the "Minimal DApp" deliverable: a single-file web application that connects to
+MetaMask, switches the wallet to the public DIDLab TrustNet network, and interacts with your deployed
+ERC-20 token.
 
-## Team Metadata
+## Network Metadata
 
-These are the live values for our DIDLab deployment:
+These are the shared defaults for the TrustNet deployment (adjust once your contract is live):
 
-- **Team**: `01`
-- **RPC URL**: `https://hh-01.didlab.org`
-- **Chain ID (decimal)**: `31337`
-- **Token Address**: `0x610178dA211FEF7D417bC0e6FeD39F05609AD788`
+- **RPC URL**: `https://eth.didlab.org`
+- **Chain ID (decimal)**: `252501`
+- **Native token**: `Trust (TT)`
+- **Token Address**: *(paste the address emitted by your deployment script)*
 
 ## Running the DApp
 
 1. Install [Node.js 22.x](https://nodejs.org/) (required by the assignment brief).
-2. Ensure the MetaMask browser extension is installed and that your DIDLab faucet key/account is imported.
+2. Ensure the MetaMask browser extension is installed and that your funded TrustNet account is imported.
 3. Serve the static page locally from the repository root:
 
    ```bash
@@ -24,31 +26,23 @@ These are the live values for our DIDLab deployment:
 
    Alternatively: `npx http-server -p 8000`.
 4. Open [http://localhost:8000](http://localhost:8000) in a MetaMask-enabled browser profile.
-5. Select your team (01–12), paste your ERC-20 token address, then click **Connect & Switch Network** followed by **Load Token**. Use the remaining buttons to refresh balances, transfer tokens, or add the token to MetaMask.
+5. Confirm the RPC endpoint (editable field defaults to `https://eth.didlab.org`), paste your ERC-20
+   token address, then click **Connect & Switch Network** followed by **Load Token**. Use the remaining
+   buttons to refresh balances, transfer tokens, or add the token to MetaMask.
 
-## Team Wallet Environment
+## Environment Alignment
 
-Use the following `.env` values when running scripts or backend tooling. Keep private keys secure and avoid sharing them outside the team repository.
+Use `Assignment-4/.env.example` as the source of truth. Copy it to `.env` and paste in:
 
 ```env
-# Member A
-RPC_URL=https://hh-01.didlab.org
-CHAIN_ID=31337
-PRIVKEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-TEAM=01
-TOKEN_NAME=DidLabToken
-TOKEN_SYMBOL=DLAB
-TOKEN_SUPPLY=1000000
-TOKEN_ADDRESS=0x610178dA211FEF7D417bC0e6FeD39F05609AD788
-
-# Member B
-RPC_URL=https://hh-01.didlab.org
-CHAIN_ID=31337
-PRIVKEY=0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
-# Member B inherits token details from Member A.
+RPC_URL=https://eth.didlab.org
+CHAIN_ID=252501
+TOKEN_NAME=CampusCredit
+TOKEN_SYMBOL=CAMP
+TOKEN_ADDRESS=0x<your_token>
 ```
 
-Create `Assignment-4/.env` from `.env.example` (committed) so both members stay aligned.
+Private keys are optional for this static UI; only paste them if you plan to automate off-chain tasks.
 
 ## Requirement Mapping
 
@@ -63,7 +57,7 @@ Create `Assignment-4/.env` from `.env.example` (committed) so both members stay 
 ## Deliverables Checklist
 
 - Repository includes `Assignment-4/index.html` (single-page DApp) and this README.
-- Fill in **Team Metadata** and confirm values before submitting.
+- Fill in **Network Metadata** and confirm values before submitting.
 - Place required screenshots in `Assignment-4/screenshots/`:
   - Connected state (account + network).
   - Token metadata view (name/symbol/decimals).
@@ -75,13 +69,13 @@ Create `Assignment-4/.env` from `.env.example` (committed) so both members stay 
 
 - **MetaMask not found**: Confirm the extension is active (non-private window) or install it.
 - **Network switch denied**: Approve MetaMask prompts for the DIDLab network; retry the connect flow.
-- **Returned no data (0x)**: Token address is wrong for the selected team chain; verify the contract exists on that network.
+- **Returned no data (0x)**: Token address is wrong for TrustNet; verify the contract exists on that network.
 - **Insufficient funds**: Use the DIDLab faucet or transfer tokens from your deployer account to the connected wallet.
 - **Event watcher silent**: Ensure MetaMask is connected and the account matches the one emitting/receiving transfers.
 
 ## Implementation Notes
 
-- User preferences persist via `localStorage` so reloading the page keeps the last team/token.
+- User preferences persist via `localStorage` so reloading the page keeps the last network/RPC/token.
 - `getAddress` and `parseUnits` handle casing and decimal conversion, preventing malformed requests.
 - Transaction logging escapes HTML to avoid DOM injection from unexpected error messages.
-- Gas tips (`maxPriorityFeePerGas`/`maxFeePerGas`) are tuned for DIDLab Hardhat networks; adjust if the network configuration changes.
+- Gas tips (`maxPriorityFeePerGas`/`maxFeePerGas`) default to ~1–2 gwei for TrustNet; raise them if the public network increases fees.

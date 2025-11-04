@@ -3,7 +3,7 @@
 ## Extra Safety & UX Touches
 - Validate all user-supplied addresses with `getAddress` before using them to avoid accidental checksum mistakes.
 - Escape log output before inserting into the DOM so provider error strings cannot inject markup.
-- Persist the selected team and token address in `localStorage` for faster reloads and fewer copy/paste mistakes.
+- Persist the selected network/RPC and token address in `localStorage` for faster reloads and fewer copy/paste mistakes.
 - Auto-watch the `Transfer` event stream and refresh balances when the connected account sends or receives funds, so the UI stays current without manual refreshes.
 
 ## Issues Encountered & Resolutions

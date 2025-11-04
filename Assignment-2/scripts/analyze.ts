@@ -1,5 +1,5 @@
-import { artifacts } from "hardhat";
 import { createPublicClient, http, decodeEventLog } from "viem";
+import campusCreditArtifact from "../static-artifacts/CampusCredit.json" assert { type: "json" };
 
 const RPC_URL = process.env.RPC_URL!;
 const CHAIN_ID = Number(process.env.CHAIN_ID!);
@@ -13,8 +13,8 @@ const HASHES = {
 async function analyze(hash: `0x${string}`, abi: any) {
   const chain = {
     id: CHAIN_ID,
-    name: `didlab-${CHAIN_ID}`,
-    nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+    name: "DIDLab TrustNet",
+    nativeCurrency: { name: "Trust", symbol: "TT", decimals: 18 },
     rpcUrls: { default: { http: [RPC_URL] } },
   } as const;
 
@@ -55,7 +55,7 @@ async function analyze(hash: `0x${string}`, abi: any) {
 }
 
 async function main() {
-  const { abi } = await artifacts.readArtifact("CampusCredit");
+  const { abi } = campusCreditArtifact as { abi: any };
 
   if (HASHES.tx1.startsWith("<")) throw new Error("Set TX1_HASH env var");
   if (HASHES.tx2.startsWith("<")) throw new Error("Set TX2_HASH env var");
